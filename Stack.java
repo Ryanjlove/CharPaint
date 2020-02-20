@@ -1,8 +1,6 @@
 
 /**
- * Simple Stack interface.
- * @author Stephen J. Sarma-Weierman
- * @version 1.0
+ * Stack interface.
  */
 public interface Stack<T> {
 

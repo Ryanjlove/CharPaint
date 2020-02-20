@@ -1,8 +1,5 @@
 /**
- * Queue interface based upon Java JDK.
- * Some methods required by the Collection interface are not included here
- * for simplicity. 
- * @author Stephen J. Sarma-Weierman
+ * Queue interface
  */
 public interface Queue<T> {
     

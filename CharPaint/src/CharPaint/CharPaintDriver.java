@@ -1,10 +1,6 @@
 
 package CharPaint;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JButton;
-
 public class CharPaintDriver {
 	public static void main(String[] args) {
 		CharPaint p = new CharPaint();

@@ -21,8 +21,10 @@ public class CharPaint extends JFrame implements MouseListener {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
+		char[] mychars ={'c','p','q','h'};
+		g.drawChars(mychars,0,4,350,350);
 		g.setColor(Color.red);
-		g.fillOval(200, 200, 300, 300);
+		//g.fillOval(200, 200, 300, 300);
 
 	}
 

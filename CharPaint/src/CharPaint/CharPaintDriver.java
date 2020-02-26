@@ -8,12 +8,10 @@ import javax.swing.JButton;
 public class CharPaintDriver {
 	public static void main(String[] args) {
 		CharPaint p = new CharPaint();
-		JButton flip = new JButton();
-		flip.addActionListener(p);
-		p.add(flip, BorderLayout.SOUTH);
-		while (true) {
-			p.repaint();
-		}
+		//JButton flip = new JButton();
+		//flip.addActionListener(p);
+		//p.add(flip, BorderLayout.SOUTH);
+		
 		/*
 		 * JPanel mainPanel = new JPanel(); JFrame myFrame = new JFrame("Panel");
 		 * Graphics myG; myFrame.setPreferredSize(new Dimension(1000, 1000));

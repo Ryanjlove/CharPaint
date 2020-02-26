@@ -1,3 +1,6 @@
+package CharPaint;
+//package CharPaint;
+
 
 /**
  * Stack interface.

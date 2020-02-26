@@ -7,31 +7,40 @@ import javax.swing.JFrame;
 
 public class CharPaint extends JFrame implements MouseListener {
 	private static final long serialVersionUID = 1L;
-	int size = 0;
+	
 
 	public CharPaint() {
 		super("CharPaint"); // giving a title to my JFrame.
 		setSize(750, 750);
 		setVisible(true);
-		setBackground(Color.white);
+		this.getContentPane().setBackground(Color.magenta);
 		addMouseListener(this);// most important line of code
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	@Override
 	public void paint(Graphics g) {
+		setBackground(Color.blue);
 		super.paint(g);
+		setBackground(Color.blue);
 		char[] mychars ={'c','p','q','h'};
-		g.drawChars(mychars,0,4,350,350);
 		g.setColor(Color.red);
-		//g.fillOval(200, 200, 300, 300);
-
+		g.drawChars(mychars,0,4,350,350);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent mouse) {
-		//this is where we make the chars go at mouse.getX(), mouse.getY()
-		
+		/*CharObject myC = new CharObject('a',mouse.getX(),mouse.getY());
+		for(int i =0; i < myList.size(); i++) {
+			if((myList[i].getX() + myList[i].getY())== (myC.getY()+myC.getX())) {
+				if((myList[i].getX() == myC.getX()) && myList[i].getY() == myC.getY()){
+				myC.setChar(myList[i].getChar());
+				}
+			}
+		}
+		//Add myC to arraylist.
+		//add to queue
+		this.repaint(); */
 	}
 
 	@Override

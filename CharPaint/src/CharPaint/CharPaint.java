@@ -1,7 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JFrame;
+import javax.swing.*;
 
 public class CharPaint extends JFrame implements MouseListener {
 	private static final long serialVersionUID = 1L;
@@ -10,12 +12,43 @@ public class CharPaint extends JFrame implements MouseListener {
 	
 
 	public CharPaint() {
-		super("CharPaint"); // giving a title to my JFrame.
-		setSize(750, 750);
-		setVisible(true);
-		this.getContentPane().setBackground(Color.magenta);
-		addMouseListener(this);// most important line of code
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+// 		super("CharPaint"); // giving a title to my JFrame.
+// 		pack();
+// 
+// 		this.getContentPane().setBackground(Color.red);
+//       //Button time
+//       JButton undo = new JButton("Undo");
+//       undo.setBounds(100,100,140,40);
+//       add(undo);
+// 		addMouseListener(this);// most important line of code
+//       setVisible(true);
+// 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
+     JFrame frame = new JFrame ("CharPaint");
+     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+     JPanel panel = new JPanel();
+     panel.setPreferredSize (new Dimension(750,750));
+          //Where the GUI is created:
+      JMenuBar menuBar;
+      JMenu menu;
+      
+      //Create the menu bar.
+      menuBar = new JMenuBar();
+      
+      //Build the first menu.
+      menu = new JMenu("Undo");
+      //menu.setMnemonic(KeyEvent.VK_A);
+      menuBar.add(menu);
+     frame.setJMenuBar(menuBar);
+     JButton button = new JButton("Undo");
+     button.setBounds(0,0,140,40);
+     panel.add (button);
+     frame.getContentPane().add(panel);
+     frame.pack();
+     frame.setVisible(true);
+
 	}
 
 	@Override

@@ -1,5 +1,3 @@
-package CharPaint;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.*;
@@ -7,6 +5,8 @@ import javax.swing.JFrame;
 
 public class CharPaint extends JFrame implements MouseListener {
 	private static final long serialVersionUID = 1L;
+   
+   private List<CharObject> myList = new ArrayList<>();
 	
 
 	public CharPaint() {
@@ -24,23 +24,24 @@ public class CharPaint extends JFrame implements MouseListener {
 		super.paint(g);
 		setBackground(Color.blue);
 		char[] mychars ={'c','p','q','h'};
-		g.setColor(Color.red);
+		g.setColor(Color.blue);
 		g.drawChars(mychars,0,4,350,350);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent mouse) {
-		/*CharObject myC = new CharObject('a',mouse.getX(),mouse.getY());
+		CharObject myC = new CharObject('a',mouse.getX(),mouse.getY());
 		for(int i =0; i < myList.size(); i++) {
-			if((myList[i].getX() + myList[i].getY())== (myC.getY()+myC.getX())) {
-				if((myList[i].getX() == myC.getX()) && myList[i].getY() == myC.getY()){
-				myC.setChar(myList[i].getChar());
+			if((myList.get(i).getX() + myList.get(i).getY())== (myC.getY()+myC.getX())) {
+				if((myList.get(i).getX() == myC.getX()) && myList.get(i).getY() == myC.getY()){
+				myC.setChar(myList.get(i).getChar());
 				}
 			}
 		}
 		//Add myC to arraylist.
 		//add to queue
-		this.repaint(); */
+		this.repaint();
+      System.out.println(myList.toArray()); 
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class CharPaint extends JFrame implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		//this is for mouse exiting the screen, dont'd do anything
+		//this is for mouse exiting the screen, dont't do anything
 		
 	}
 

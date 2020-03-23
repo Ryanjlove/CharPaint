@@ -1,7 +1,3 @@
-package CharPaint;
-//package CharPaint;
-
-
 import java.util.ListIterator;
 
 

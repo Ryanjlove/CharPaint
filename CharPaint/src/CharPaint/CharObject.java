@@ -1,5 +1,3 @@
-package CharPaint;
-
 public class CharObject {
 	private int x;
 	private int y;

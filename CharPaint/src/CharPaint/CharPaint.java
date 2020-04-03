@@ -5,7 +5,7 @@ import java.awt.event.*;
 import javax.swing.JFrame;
 import javax.swing.*;
 
-public class CharPaint extends JFrame implements MouseListener {
+public class CharPaint extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
    
    private List<CharObject> myList = new ArrayList<>();
@@ -44,31 +44,26 @@ public class CharPaint extends JFrame implements MouseListener {
      redo = new JMenu("Redo");
      menuBar.add(redo);
      frame.setJMenuBar(menuBar);
-     JPanel panel = new JPanel();
+     NewPanel panel = new NewPanel();
      frame.getContentPane().add(panel);
      frame.setSize (new Dimension(750,750));
-     frame.getContentPane().setBackground(Color.red);
-     addMouseListener(this);
-     frame.show();
-
-     //JButton button = new JButton("Undo");
-     //button.setBounds(0,0,140,40);
-     //panel.add (button);
-     //frame.getContentPane().add(panel);
-     //this.getContentPane().setBackground(Color.red);
-     addMouseListener(this);// most important line of code
+     //frame.getContentPane().setBackground(Color.red);
+     panel.addMouseListener(this);
+     //panel.show();
+     frame.setVisible(true);
 
 	}
 
-	@Override
-	public void paint(Graphics g) {
-		setBackground(Color.blue);
-		super.paint(g);
-		setBackground(Color.blue);
-		char[] mychars ={'c','p','q','h'};
-		g.setColor(Color.blue);
-		g.drawChars(mychars,0,4,350,350);
-	}
+// @Override
+// 	public void paintComponent(Graphics g) {
+//       System.out.println("Called");
+// 		setBackground(Color.blue);
+// 		super.paint(g);
+// 		setBackground(Color.blue);
+// 		char[] mychars ={'c','p','q','h'};
+// 		g.setColor(Color.blue);
+// 		g.drawChars(mychars,0,4,350,350);
+// 	}
 
 	@Override
 	public void mouseClicked(MouseEvent mouse) {
@@ -116,4 +111,19 @@ public class CharPaint extends JFrame implements MouseListener {
 		System.out.println(e + " size: " + size);
 		this.repaint();
 	}*/
+}
+
+class NewPanel extends JPanel {
+     public NewPanel () 
+     {
+       this.setBackground (Color.cyan);
+     }
+     
+     public void paintComponent (Graphics g)
+     {
+   		setBackground(Color.blue);
+   		char[] mychars ={'c','p','q','h'};
+   		g.setColor(Color.blue);
+   		g.drawChars(mychars,0,4,350,350);
+     }
 }

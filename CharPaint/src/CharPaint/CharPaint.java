@@ -12,22 +12,10 @@ public class CharPaint extends JPanel implements MouseListener {
 	
 
 	public CharPaint() {
-// 		super("CharPaint"); // giving a title to my JFrame.
-// 		pack();
-// 
-// 		this.getContentPane().setBackground(Color.red);
-//       //Button time
-//       JButton undo = new JButton("Undo");
-//       undo.setBounds(100,100,140,40);
-//       add(undo);
-// 		addMouseListener(this);// most important line of code
-//       setVisible(true);
-// 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
       JMenuBar menuBar;
-      Component undo;
-      Component redo;
-
+      JMenu file, edit;
+      JMenuItem createNew, save, load, exit, undo, redo;
 
      JFrame frame = new JFrame ("CharPaint");
      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,35 +23,54 @@ public class CharPaint extends JPanel implements MouseListener {
       menuBar = new JMenuBar();
       
       //Build the first menu.
-      undo = new JMenu("Undo");
-      //menu.setMnemonic(KeyEvent.VK_A);
-      menuBar.add(undo);
-     //frame.setJMenuBar(menuBar);
+      file = new JMenu("File");
+      menuBar.add(file);
+      
+     createNew = new JMenuItem("New");
+     createNew.addActionListener(new MenuActionListener());
+     //createNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+     //createNew.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+     file.add(createNew);
      
-     //Second menu button
-     redo = new JMenu("Redo");
-     menuBar.add(redo);
+     save = new JMenuItem("Save");
+     save.addActionListener(new MenuActionListener());
+     //save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+     //save.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+     file.add(save);
+     
+     load = new JMenuItem("Load");
+     load.addActionListener(new MenuActionListener());
+     file.add(load);
+     
+     exit = new JMenuItem("Exit");
+     exit.addActionListener(new MenuActionListener());
+     //exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
+     //exit.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
+     file.add(exit);
+     
+     
+     //Second menu 
+     edit = new JMenu("Edit");
+     menuBar.add(edit);
+     
+     undo = new JMenuItem("Undo");
+     undo.addActionListener(new MenuActionListener());
+     edit.add(undo);
+     
+     redo = new JMenuItem("Redo");
+     redo.addActionListener(new MenuActionListener());
+     edit.add(redo);
+     
      frame.setJMenuBar(menuBar);
      NewPanel panel = new NewPanel();
      frame.getContentPane().add(panel);
      frame.setSize (new Dimension(750,750));
-     //frame.getContentPane().setBackground(Color.red);
+
      panel.addMouseListener(this);
-     //panel.show();
+
      frame.setVisible(true);
 
 	}
-
-// @Override
-// 	public void paintComponent(Graphics g) {
-//       System.out.println("Called");
-// 		setBackground(Color.blue);
-// 		super.paint(g);
-// 		setBackground(Color.blue);
-// 		char[] mychars ={'c','p','q','h'};
-// 		g.setColor(Color.blue);
-// 		g.drawChars(mychars,0,4,350,350);
-// 	}
 
 	@Override
 	public void mouseClicked(MouseEvent mouse) {
@@ -126,4 +133,18 @@ class NewPanel extends JPanel {
    		g.setColor(Color.blue);
    		g.drawChars(mychars,0,4,350,350);
      }
+}
+
+class MenuActionListener implements ActionListener {
+  public void actionPerformed(ActionEvent e) {
+    String s = e.getActionCommand();
+    if (s.equals("Exit"))
+      System.exit(0);
+    else if (s.equals("Save"));
+    else if (s.equals("New"));
+    else if (s.equals("Load"));
+    else if (s.equals("Undo"));
+    else if (s.equals("Redo"));
+
+  }
 }

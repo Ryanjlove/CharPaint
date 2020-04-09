@@ -9,6 +9,10 @@ public class CharPaint extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
    
    private List<CharObject> myList = new ArrayList<>();
+   
+   private Stack<CharObject> added = new VectorStack<>();
+   
+   private Stack<CharObject> undone = new VectorStack<>();
 	
 
 	public CharPaint() {
@@ -28,14 +32,10 @@ public class CharPaint extends JPanel implements MouseListener {
       
      createNew = new JMenuItem("New");
      createNew.addActionListener(new MenuActionListener());
-     //createNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
-     //createNew.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
      file.add(createNew);
      
      save = new JMenuItem("Save");
      save.addActionListener(new MenuActionListener());
-     //save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
-     //save.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
      file.add(save);
      
      load = new JMenuItem("Load");
@@ -44,8 +44,6 @@ public class CharPaint extends JPanel implements MouseListener {
      
      exit = new JMenuItem("Exit");
      exit.addActionListener(new MenuActionListener());
-     //exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
-     //exit.getAccessibleContext().setAccessibleDescription("This doesn't really do anything");
      file.add(exit);
      
      
@@ -74,14 +72,17 @@ public class CharPaint extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent mouse) {
-		CharObject myC = new CharObject('a',mouse.getX(),mouse.getY());
-		for(int i =0; i < myList.size(); i++) {
-			if((myList.get(i).getX() + myList.get(i).getY())== (myC.getY()+myC.getX())) {
-				if((myList.get(i).getX() == myC.getX()) && myList.get(i).getY() == myC.getY()){
-				myC.setChar(myList.get(i).getChar());
-				}
-			}
-		}
+		CharObject myC = new CharObject('X',mouse.getX(),mouse.getY());
+// 		for(int i =0; i < myList.size(); i++) {
+// 			if((myList.get(i).getX() + myList.get(i).getY())== (myC.getY()+myC.getX())) {
+// 				if((myList.get(i).getX() == myC.getX()) && myList.get(i).getY() == myC.getY()){
+// 				   myC.setChar(myList.get(i).getChar());
+      myList.add(myC);
+      added.push(myC);
+      
+				//}
+			//}
+		//}
 		//Add myC to arraylist.
 		//add to queue
 		this.repaint();
@@ -118,33 +119,87 @@ public class CharPaint extends JPanel implements MouseListener {
 		System.out.println(e + " size: " + size);
 		this.repaint();
 	}*/
-}
-
-class NewPanel extends JPanel {
+   
+   class NewPanel extends JPanel {
      public NewPanel () 
      {
-       this.setBackground (Color.cyan);
+       this.setBackground (Color.white);
      }
      
      public void paintComponent (Graphics g)
      {
-   		setBackground(Color.blue);
-   		char[] mychars ={'c','p','q','h'};
-   		g.setColor(Color.blue);
-   		g.drawChars(mychars,0,4,350,350);
+       for(int i = 0; i < myList.size()+1; i++){
+         // int x = myList.get(i).getX();
+//          int y = myList.get(i).getY();
+//          char [] val = myList.get(i).getChar();
+         char [] val = new char[1];
+         val[0] = 'X';
+         setBackground(Color.white);
+         g.setColor(Color.black);
+         g.drawChars(val,0,1,100,100);
+       }
+   	// 	setBackground(Color.white);
+//    		char[] mychars ={'c','p','q','h'};
+//    		g.setColor(Color.black);
+//    		g.drawChars(mychars,0,4,350,350);
      }
+   }
+   
+   class MenuActionListener implements ActionListener {
+     public void actionPerformed(ActionEvent e) {
+       String s = e.getActionCommand();
+       if (s.equals("Exit"))
+         System.exit(0);
+       else if (s.equals("Save"));
+       else if (s.equals("New"));
+       else if (s.equals("Load"));
+       else if (s.equals("Undo")){
+         undone.push(added.pop());
+         myList.remove(undone.peek());
+       }
+       else if (s.equals("Redo")){
+         added.push(undone.pop());
+         myList.add(added.peek());
+       }
+   
+     }
+   }
 }
 
-class MenuActionListener implements ActionListener {
-  public void actionPerformed(ActionEvent e) {
-    String s = e.getActionCommand();
-    if (s.equals("Exit"))
-      System.exit(0);
-    else if (s.equals("Save"));
-    else if (s.equals("New"));
-    else if (s.equals("Load"));
-    else if (s.equals("Undo"));
-    else if (s.equals("Redo"));
+// class NewPanel extends JPanel {
+//      public NewPanel () 
+//      {
+//        this.setBackground (Color.white);
+//      }
+//      
+//      public void paintComponent (Graphics g)
+//      {
+//        for(int i = 0; i < myList.size(); i++){
+//          int x = myList.get(i).getX();
+//          int y = myList.get(i).getY();
+//          char [] val = myList.get(i).getChar();
+//          g.drawChars(val,0,4,x,y);
+//        }
+//    	// 	setBackground(Color.white);
+// //    		char[] mychars ={'c','p','q','h'};
+// //    		g.setColor(Color.black);
+// //    		g.drawChars(mychars,0,4,350,350);
+//      }
+// }
 
-  }
-}
+// class MenuActionListener implements ActionListener {
+//   public void actionPerformed(ActionEvent e) {
+//     String s = e.getActionCommand();
+//     if (s.equals("Exit"))
+//       System.exit(0);
+//     else if (s.equals("Save"));
+//     else if (s.equals("New"));
+//     else if (s.equals("Load"));
+//     else if (s.equals("Undo")){
+//       undone.push(added.pop());
+//       myList.remove(undone.peek());
+//     }
+//     else if (s.equals("Redo"));
+// 
+//   }
+// }

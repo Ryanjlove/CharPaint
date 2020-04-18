@@ -12,6 +12,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import java.io.*;
+import java.util.Scanner;
+
 public class CharPaint extends JPanel implements MouseListener {
 	private static final long serialVersionUID = 1L;
 
@@ -176,24 +179,66 @@ public class CharPaint extends JPanel implements MouseListener {
 			String s = e.getActionCommand();
 			if (s.equals("Exit"))
 				System.exit(0);
-			else if (s.equals("Save"))
-				System.out.println("This function has not been implemented yet");
+			else if (s.equals("Save")){
+				System.out.println("Please enter a filename to save as:  ");
+            String filename;
+            Scanner in = new Scanner(System.in);
+            filename = in.nextLine();
+            File file = new File(filename);
+            try{
+               ObjectOutputStream fout = new ObjectOutputStream(new FileOutputStream(file));
+               
+               fout.writeInt(myList.size());
+               for(int i = 0; i < myList.size(); i++){
+                  if(myList.get(i) != null)
+                     fout.writeObject(myList.get(i));
+               }
+               fout.close();
+               System.out.println("File saved successfully.");
+            } catch (IOException E) {
+               System.out.println("An error has occurred with saving the file.");
+            }
+         }   
 			else if (s.equals("New")){
             myList = new ArrayList<>();
 	         added = new VectorStack<>();
 	         undone = new VectorStack<>();
             panel.repaint();
          }
-			else if (s.equals("Load"))
-				System.out.println("This function has not been implemented yet");
+			else if (s.equals("Load")){
+				System.out.println("Please enter a filename to load:  ");
+            String filename;
+            Scanner in = new Scanner(System.in);
+            filename = in.nextLine();
+            File file = new File(filename);
+            try{
+               ObjectInputStream fin = new ObjectInputStream(new FileInputStream(file));
+               myList = new ArrayList<>();
+	            added = new VectorStack<>();
+	            undone = new VectorStack<>();
+               int size = fin.readInt();
+               for(int i = 0; i < size; i++){
+                  CharObject obj = (CharObject)fin.readObject();
+                  myList.add(obj);
+               }
+               fin.close();
+               panel.repaint();
+            } catch (ClassNotFoundException | IOException Z){
+               System.out.println("An error has occurred in loading the file");
+            }
+         }   
 			else if (s.equals("Undo")) {
-				undone.push(added.pop());
-				myList.remove(undone.peek());
-				panel.repaint();
+            if(!added.empty()){
+   				undone.push(added.pop());
+   				myList.remove(undone.peek());
+   				panel.repaint();
+            }   
 			} else if (s.equals("Redo")) {
-				added.push(undone.pop());
-				myList.add(added.peek());
-				panel.repaint();
+            if(!undone.empty()){
+   				added.push(undone.pop());
+   				myList.add(added.peek());
+   				panel.repaint();
+            }
 			}
 
 		}

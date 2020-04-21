@@ -1,12 +1,14 @@
 package CharPaint;
 
-public class CharObject {
+import java.io.Serializable;
+
+public class CharObject implements Serializable {
 	private int x;
 	private int y;
 	private char[] myC = new char[1];
 
 	CharObject() {
-		myC[0] = 'b';
+		myC[0] = 'o';
 		x = 0;
 		y = 0;
 	}

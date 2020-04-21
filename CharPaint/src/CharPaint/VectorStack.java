@@ -1,4 +1,3 @@
-
 package CharPaint;
 
 import java.util.EmptyStackException;

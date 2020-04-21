@@ -1,6 +1,3 @@
-package CharPaint;
-//package CharPaint;
-
 /**
  * Queue interface
  */

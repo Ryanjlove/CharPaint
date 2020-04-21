@@ -1,4 +1,3 @@
-
 package CharPaint;
 
 public class CharPaintDriver {
